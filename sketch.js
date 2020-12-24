@@ -1,31 +1,36 @@
-let gridX = 60;
+let gridX = 30;
 let gridY = 30;
 let radius = 200;
+let startAngle = 45;
 let startDelay = 10;
 let frame = 0;
 let cellWidth;
 let cellHeight;
 let field;
+let shape;
+let shapeVertexNumber = 4;
 
 function setup() {
     createCanvas(windowWidth,windowHeight);
     cellWidth = width/gridX;
     cellHeight = height/gridY;
-    field = [];
+    field = []; // start the flow field
     for (let i = 0; i < gridX; i++) {
         field[i] = [];
         for (let j = 0; j < gridY; j++) {
-            field[i][j] = radians(45);
+            field[i][j] = radians(startAngle);
         }
+    }
+    shape = []; // generative shape
+    for (let i = 0; i < shapeVertexNumber; i++) {
+        shape.push(createVector(random(cellWidth),random(cellHeight)));
     }
 
 }
 
 function draw() {
-    background(225,0,255);
+    background(255);
     noFill();
-    stroke(255,255,0);
-    strokeWeight(2);
     for (let i = 0; i < gridX; i++) {
         for (let j = 0; j < gridY; j++) {
             push();
@@ -52,6 +57,11 @@ function rotationReference() {
 
 function drawShape() {
     //line(cellWidth*0.1,cellHeight/2,cellWidth*0.9,cellHeight/2);
-    rect(cellWidth*0.1,cellHeight*.4,cellWidth*.8,cellHeight*.1); 
+    //rect(cellWidth*0.1,cellHeight*.4,cellWidth*.8,cellHeight*.1); 
+    beginShape();
+    for (let i = 0; i < shape.length; i++) {
+        vertex(shape[i].x,shape[i].y);
+    }
+    endShape(CLOSE);
 }
 
