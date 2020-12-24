@@ -1,7 +1,7 @@
 let gridX = 60;
 let gridY = 30;
 let radius = 200;
-let startDelay = 5;
+let startDelay = 10;
 let frame = 0;
 let cellWidth;
 let cellHeight;
